@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,6 +24,9 @@
             <p><strong>Category:</strong> ${book.category}</p>
             <p><strong>Available in stock:</strong> ${book.unitsInStock}</p>
             <h4>${book.price} USD</h4>
+            <a href="<spring:url value="/books" />" class="btn btn-default">
+                <span class="glyphicon glyphicon-hand-left"></span> back
+            </a>
             <a href="#" class="btn btn-warning btn-large">
                 <span class="glyphicon glyphicon-shopping-cart"> Order</span>
             </a>
