@@ -10,31 +10,37 @@ import java.util.List;
 @Repository
 public class InMemoryBookRepository implements BookRepository {
 
-    @Override
-    public List<Book> getAllBooks() {
-        List<Book> books = new ArrayList<>();
+    private List<Book> books;
 
-        Book book = new Book(1L, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", new BigDecimal("39.95"));
+    public InMemoryBookRepository() {
+        books = new ArrayList<>();
+
+        Book book = new Book(1L, "Harry Potter", "J.K. Rowling", new BigDecimal("39.95"));
         book.setCategory("Children's Books");
         book.setUnitsInStock(100);
         books.add(book);
-        books.add(book);
-        books.add(book);
 
-        book = new Book(2L, "Way of the Peaceful Warrior", "Dan Millman", new BigDecimal("11.95"));
+        book = new Book(2L, "Peaceful Warrior", "Dan Millman", new BigDecimal("11.95"));
         book.setCategory("Spirituality");
         book.setUnitsInStock(10);
-        books.add(book);
-        books.add(book);
         books.add(book);
 
         book = new Book(3L, "Memoirs of a Geisha", "Arthur Golden", new BigDecimal("14.95"));
         book.setCategory("Biographical");
         book.setUnitsInStock(30);
         books.add(book);
-        books.add(book);
-        books.add(book);
+    }
 
+    @Override
+    public List<Book> getAllBooks() {
         return books;
+    }
+
+    @Override
+    public Book getBookById(Long bookId) {
+        return books.stream()
+                .filter(book -> book.getId().equals(bookId))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

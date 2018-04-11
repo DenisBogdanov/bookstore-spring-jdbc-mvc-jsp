@@ -10,8 +10,8 @@ public class Book {
     private String author;
     private BigDecimal price;
     private String category;
-    private long unitsInStock;
-    private long unitsInOrder;
+    private int unitsInStock;
+    private int unitsInOrder;
 
     public Book() {
     }
@@ -63,19 +63,19 @@ public class Book {
         this.category = category;
     }
 
-    public long getUnitsInStock() {
+    public int getUnitsInStock() {
         return unitsInStock;
     }
 
-    public void setUnitsInStock(long unitsInStock) {
+    public void setUnitsInStock(int unitsInStock) {
         this.unitsInStock = unitsInStock;
     }
 
-    public long getUnitsInOrder() {
+    public int getUnitsInOrder() {
         return unitsInOrder;
     }
 
-    public void setUnitsInOrder(long unitsInOrder) {
+    public void setUnitsInOrder(int unitsInOrder) {
         this.unitsInOrder = unitsInOrder;
     }
 
