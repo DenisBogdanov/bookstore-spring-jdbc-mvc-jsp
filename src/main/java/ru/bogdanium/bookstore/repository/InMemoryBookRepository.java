@@ -33,7 +33,7 @@ public class InMemoryBookRepository implements BookRepository {
 
     @Override
     public List<Book> getAllBooks() {
-        return books;
+        return new ArrayList<>(books);
     }
 
     @Override
