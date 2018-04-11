@@ -6,6 +6,7 @@ import ru.bogdanium.bookstore.model.Book;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryBookRepository implements BookRepository {
@@ -16,7 +17,7 @@ public class InMemoryBookRepository implements BookRepository {
         books = new ArrayList<>();
 
         Book book = new Book(1L, "Harry Potter", "J.K. Rowling", new BigDecimal("39.95"));
-        book.setCategory("Children's Books");
+        book.setCategory("Fiction");
         book.setUnitsInStock(100);
         books.add(book);
 
@@ -42,5 +43,12 @@ public class InMemoryBookRepository implements BookRepository {
                 .filter(book -> book.getId().equals(bookId))
                 .findFirst()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    @Override
+    public List<Book> getBooksByCategory(String category) {
+        return books.stream()
+                .filter(book -> category.equalsIgnoreCase(book.getCategory()))
+                .collect(Collectors.toList());
     }
 }
