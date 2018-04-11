@@ -13,7 +13,7 @@ public class OrderController {
 
     @RequestMapping("/order/1/2")
     public String process() {
-        orderService.processOrder(1L, 2);
+        orderService.processOrder(4L, 2);
         return "redirect:/books";
     }
 }
