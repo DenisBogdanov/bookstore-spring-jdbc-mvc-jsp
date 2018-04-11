@@ -1,22 +1,21 @@
 package ru.bogdanium.bookstore.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.bogdanium.bookstore.model.Book;
-
-import java.math.BigDecimal;
+import ru.bogdanium.bookstore.repository.BookRepository;
 
 @Controller
 public class BookController {
 
+    @Autowired
+    private BookRepository bookRepository;
+
     @RequestMapping("/books")
     public String listBooks(Model model) {
-        Book book = new Book(1L, "Harry Potter and the Half-Blood Prince", "J.K. Rowling", new BigDecimal("39.95"));
-        book.setCategory("Children's Books");
-        book.setUnitsInStock(100);
 
-        model.addAttribute("book", book);
+        model.addAttribute("books", bookRepository.getAllBooks());
         return "books";
     }
 }

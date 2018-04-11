@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,16 +18,18 @@
 
 <section class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-3">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h3>${book.title}</h3>
-                    <p>By ${book.author}</p>
-                    <p>${book.price} USD</p>
-                    <p>Available ${book.unitsInStock} units in stock</p>
+        <c:forEach items="${books}" var="book">
+            <div class="col-sm-6 col-md-3">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>${book.title}</h3>
+                        <p>By ${book.author}</p>
+                        <p>${book.price} USD</p>
+                        <p>Available ${book.unitsInStock} units in stock</p>
+                    </div>
                 </div>
             </div>
-        </div>
+        </c:forEach>
     </div>
 </section>
 
