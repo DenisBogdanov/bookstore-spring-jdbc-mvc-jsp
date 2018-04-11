@@ -1,0 +1,103 @@
+package ru.bogdanium.bookstore.model;
+
+import java.math.BigDecimal;
+import java.util.Objects;
+
+public class Book {
+
+    private Long id;
+    private String title;
+    private String author;
+    private BigDecimal price;
+    private String category;
+    private long unitsInStock;
+    private long unitsInOrder;
+
+    public Book() {
+    }
+
+    public Book(Long id, String title, String author, BigDecimal price) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public long getUnitsInStock() {
+        return unitsInStock;
+    }
+
+    public void setUnitsInStock(long unitsInStock) {
+        this.unitsInStock = unitsInStock;
+    }
+
+    public long getUnitsInOrder() {
+        return unitsInOrder;
+    }
+
+    public void setUnitsInOrder(long unitsInOrder) {
+        this.unitsInOrder = unitsInOrder;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                '}';
+    }
+}
