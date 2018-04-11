@@ -3,10 +3,10 @@ package ru.bogdanium.bookstore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import ru.bogdanium.bookstore.model.Book;
 import ru.bogdanium.bookstore.service.BookService;
 
@@ -38,13 +38,24 @@ public class BookController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String getAddForm(Model model) {
         Book book = new Book();
-        model.addAttribute("book", book);
+        model.addAttribute("emptyBook", book);
         return "add-book";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addBook(@ModelAttribute Book book) {
+    public String addBook(@ModelAttribute Book book, BindingResult result) {
+        String[] suppressedFields = result.getSuppressedFields();
+        if (suppressedFields.length > 0) {
+            throw new RuntimeException("Attempting to bind disallowed fields: " +
+                    StringUtils.arrayToCommaDelimitedString(suppressedFields));
+        }
+
         bookService.addBook(book);
         return "redirect:/books";
+    }
+
+    @InitBinder
+    public void initializeBinder(WebDataBinder binder) {
+        binder.setDisallowedFields("id", "unitsInOrder");
     }
 }

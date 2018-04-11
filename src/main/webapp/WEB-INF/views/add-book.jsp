@@ -18,7 +18,7 @@
 </section>
 
 <section class="container">
-    <form:form modelAttribute="book" class="form-horizontal">
+    <form:form modelAttribute="emptyBook" class="form-horizontal">
 
         <fieldset>
             <legend>Add new book</legend>
