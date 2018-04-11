@@ -51,4 +51,10 @@ public class InMemoryBookRepository implements BookRepository {
                 .filter(book -> category.equalsIgnoreCase(book.getCategory()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void addBook(Book book) {
+        book.setId(books.size() + 1L);
+        books.add(book);
+    }
 }

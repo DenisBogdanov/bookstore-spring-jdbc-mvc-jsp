@@ -11,4 +11,6 @@ public interface BookRepository {
     Book getBookById(Long bookId);
 
     List<Book> getBooksByCategory(String category);
+
+    void addBook(Book book);
 }

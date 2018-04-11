@@ -11,4 +11,6 @@ public interface BookService {
     List<Book> getBooksByCategory(String category);
 
     Book getBookById(Long bookId);
+
+    void addBook(Book book);
 }

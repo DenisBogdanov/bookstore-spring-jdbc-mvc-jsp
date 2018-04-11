@@ -3,8 +3,11 @@ package ru.bogdanium.bookstore.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import ru.bogdanium.bookstore.model.Book;
 import ru.bogdanium.bookstore.service.BookService;
 
 @Controller
@@ -30,5 +33,18 @@ public class BookController {
     public String getBookByCategory(Model model, @PathVariable String category) {
         model.addAttribute("books", bookService.getBooksByCategory(category));
         return "books";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String getAddForm(Model model) {
+        Book book = new Book();
+        model.addAttribute("book", book);
+        return "add-book";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String addBook(@ModelAttribute Book book) {
+        bookService.addBook(book);
+        return "redirect:/books";
     }
 }
