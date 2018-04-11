@@ -9,4 +9,6 @@ public interface BookService {
     List<Book> getAllBooks();
 
     List<Book> getBooksByCategory(String category);
+
+    Book getBookById(Long bookId);
 }

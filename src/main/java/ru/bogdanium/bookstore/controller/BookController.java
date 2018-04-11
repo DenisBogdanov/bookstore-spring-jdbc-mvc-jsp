@@ -20,6 +20,12 @@ public class BookController {
         return "books";
     }
 
+    @RequestMapping("/book/{bookId}")
+    public String getBook(@PathVariable Long bookId, Model model) {
+        model.addAttribute("book", bookService.getBookById(bookId));
+        return "book";
+    }
+
     @RequestMapping("/{category}")
     public String getBookByCategory(Model model, @PathVariable String category) {
         model.addAttribute("books", bookService.getBooksByCategory(category));
