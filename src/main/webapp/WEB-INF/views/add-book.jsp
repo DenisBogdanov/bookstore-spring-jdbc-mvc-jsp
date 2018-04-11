@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -24,7 +25,9 @@
             <legend>Add new book</legend>
 
             <div class="form-group">
-                <label for="title" class="control-label col-lg-2">Title</label>
+                <label for="title" class="control-label col-lg-2">
+                    <spring:message code="add-book.form.title.label"/>
+                </label>
                 <div class="col-lg-10">
                     <form:input path="title" id="title" type="text" class="form:input-large"/>
                 </div>
