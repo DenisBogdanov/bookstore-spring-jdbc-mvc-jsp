@@ -22,6 +22,7 @@
         <c:forEach items="${books}" var="book">
             <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
+                    <img src="<c:url value="/static/img/${book.id}.jpg"/>" alt="${book.title}" style="height: 300px;">
                     <div class="caption">
                         <h3>${book.title}</h3>
                         <p>By ${book.author}</p>
