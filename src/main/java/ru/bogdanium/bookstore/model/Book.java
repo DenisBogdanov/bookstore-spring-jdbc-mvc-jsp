@@ -1,10 +1,14 @@
 package ru.bogdanium.bookstore.model;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+@XmlRootElement
 public class Book {
 
     private Long id;
@@ -15,6 +19,7 @@ public class Book {
     private int unitsInStock;
     private int unitsInOrder;
 
+    @JsonIgnore
     private MultipartFile img;
 
     public Book() {
@@ -83,6 +88,7 @@ public class Book {
         this.unitsInOrder = unitsInOrder;
     }
 
+    @XmlTransient
     public MultipartFile getImg() {
         return img;
     }
