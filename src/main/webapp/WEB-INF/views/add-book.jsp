@@ -21,7 +21,7 @@
 </section>
 
 <section class="container">
-    <form:form modelAttribute="emptyBook" class="form-horizontal">
+    <form:form modelAttribute="emptyBook" class="form-horizontal" enctype="multipart/form-data">
 
         <fieldset>
             <legend>Add new book</legend>
@@ -60,6 +60,15 @@
                 <label class="control-label col-lg-2" for="unitsInStock">Units In Stock</label>
                 <div class="col-lg-10">
                     <form:input id="unitsInStock" path="unitsInStock" type="text" class="form:input-large"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="bookImg" class="control-label col-lg-2">
+                    <spring:message code="add-book.form.img.label" />
+                </label>
+                <div class="col-lg-10">
+                    <form:input id="bookImg" path="img" type="file" cssClass="form:input-large" />
                 </div>
             </div>
 

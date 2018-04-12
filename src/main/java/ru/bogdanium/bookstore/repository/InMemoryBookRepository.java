@@ -54,7 +54,6 @@ public class InMemoryBookRepository implements BookRepository {
 
     @Override
     public void addBook(Book book) {
-        book.setId(books.size() + 1L);
         books.add(book);
     }
 }

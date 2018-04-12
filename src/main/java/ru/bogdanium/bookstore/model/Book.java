@@ -1,5 +1,7 @@
 package ru.bogdanium.bookstore.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -12,6 +14,8 @@ public class Book {
     private String category;
     private int unitsInStock;
     private int unitsInOrder;
+
+    private MultipartFile img;
 
     public Book() {
     }
@@ -77,6 +81,14 @@ public class Book {
 
     public void setUnitsInOrder(int unitsInOrder) {
         this.unitsInOrder = unitsInOrder;
+    }
+
+    public MultipartFile getImg() {
+        return img;
+    }
+
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 
     @Override
