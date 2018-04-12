@@ -1,6 +1,7 @@
 package ru.bogdanium.bookstore.repository;
 
 import org.springframework.stereotype.Repository;
+import ru.bogdanium.bookstore.exception.BookNotFoundException;
 import ru.bogdanium.bookstore.model.Book;
 
 import java.math.BigDecimal;
@@ -42,7 +43,7 @@ public class InMemoryBookRepository implements BookRepository {
         return books.stream()
                 .filter(book -> book.getId().equals(bookId))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(() -> new BookNotFoundException(bookId));
     }
 
     @Override

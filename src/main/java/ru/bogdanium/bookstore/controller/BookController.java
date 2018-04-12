@@ -8,12 +8,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+import ru.bogdanium.bookstore.exception.BookNotFoundException;
+import ru.bogdanium.bookstore.exception.NoBooksWithCategoryException;
 import ru.bogdanium.bookstore.model.Book;
 import ru.bogdanium.bookstore.service.BookService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/books")
@@ -35,8 +39,12 @@ public class BookController {
     }
 
     @RequestMapping("/{category}")
-    public String getBookByCategory(Model model, @PathVariable String category) {
-        model.addAttribute("books", bookService.getBooksByCategory(category));
+    public String getBooksByCategory(Model model, @PathVariable String category) {
+        List<Book> booksByCategory = bookService.getBooksByCategory(category);
+        if (booksByCategory == null || booksByCategory.isEmpty()) {
+            throw new NoBooksWithCategoryException();
+        }
+        model.addAttribute("books", booksByCategory);
         return "books";
     }
 
@@ -77,5 +85,17 @@ public class BookController {
     @InitBinder
     public void initializeBinder(WebDataBinder binder) {
         binder.setAllowedFields("title", "author", "price", "category", "unitsInStock", "img");
+    }
+
+    @ExceptionHandler
+    public ModelAndView handleError(HttpServletRequest request, BookNotFoundException e) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.addObject("invalidBookId", e.getBookId());
+        modelAndView.addObject("exception", e);
+        modelAndView.addObject("url", request.getRequestURL() + "?" + request.getQueryString());
+        modelAndView.setViewName("book-not-found");
+
+        return modelAndView;
     }
 }
