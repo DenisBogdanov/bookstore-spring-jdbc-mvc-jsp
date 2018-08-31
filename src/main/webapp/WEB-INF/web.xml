@@ -5,7 +5,7 @@
                         http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
 
     <servlet>
-        <servlet-name>application-context</servlet-name>
+        <servlet-name>applicationContext</servlet-name>
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
@@ -14,28 +14,22 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>application-context</servlet-name>
+        <servlet-name>applicationContext</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>
-            /WEB-INF/spring/security-context.xml
-        </param-value>
+        <param-value>/WEB-INF/spring/security-context.xml</param-value>
     </context-param>
 
     <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
-        <filter-class>
-            org.springframework.web.filter.DelegatingFilterProxy
-        </filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
 
     <filter-mapping>
